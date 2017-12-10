@@ -27,7 +27,8 @@
 </head>
 <body>
 	<div id="sse">
-		<input type="text" class="msg" value=""><button id="send">发送</button>
+		<input type="text" class="msg" value="">
+		<button id="send">发送</button>
 	</div>
 </body>
 </html>

@@ -1,1 +1,78 @@
-<?php
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WebSocket</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var ws = new WebSocket("ws://116.62.58.170:9502");
+		if(ws.readyState!=1){
+    		ws.onopen = function() {
+    			ws.send("ok");
+    		};
+		}
+		$("#send").click(function(){
+			ws.send(JSON.stringify({fd:1,msg:$(".msg").val()}));
+		});
+		
+		ws.onmessage = function(evt) {
+			var received_msg = evt.data;
+			alert(received_msg);
+		};
+	});
+
+$(function(){
+	$(".list-group-item").click(function(){
+		var _this = $(this);
+		$(".list-group-item").removeClass("active");
+		_this.addClass("active");
+	});
+});
+</script>
+<style type="text/css">
+.container{
+	margin-top: 20px;
+}
+.col{
+	border: 1px solid #f2f2f2;
+	padding: 10px;
+}
+.list-group-item{
+	cursor: pointer;
+}
+.active{
+	border: 1px solid green;
+    margin-bottom: 0px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<div id="sse">
+		<!--<input type="text" class="msg" value="">
+		<button id="send">发送</button>
+		-->
+
+	</div>
+	<div class="row">
+	  <h2>WEB聊天系统</h2>
+      <div class="col-xs-4 col">
+      	<ul class="list-group">
+          <li class="list-group-item" data-id="">张三&nbsp;&nbsp;<span class="label label-success">在线</span></li>
+          <li class="list-group-item">张三&nbsp;&nbsp;<span class="label label-success">在线</span></li>
+          <li class="list-group-item">张三&nbsp;&nbsp;<span class="label label-success">在线</span></li>
+          <li class="list-group-item">张三&nbsp;&nbsp;<span class="label label-success">在线</span></li>
+          <li class="list-group-item">张三&nbsp;&nbsp;<span class="label label-success">在线</span></li>
+        </ul>
+      </div>
+      <div class="col-xs-6 col">.col-xs-6<br>Subsequent columns continue along the new line.</div>
+      <div class="col-xs-10 col">
+      	<textarea class="form-control" rows="3"></textarea><br>
+      	<button type="button" class="btn btn-success">发送</button>
+      </div>
+    </div>
+</div>
+</body>
+</html>
