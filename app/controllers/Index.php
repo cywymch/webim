@@ -5,18 +5,7 @@ class IndexController extends Yaf\Controller_Abstract
 
     public function indexAction()
     {
-        $redis = new Redis();
-        $redis->connect('116.62.58.170', '6379');
-        $redis->auth('chen123456');
-        $data = $redis->keys("fd_*");
-        foreach ($data as $key=>$vo){
-            $re = $redis->get($vo);
-            $result[$key]['fd'] = $re['fd'];
-            $result[$key]['member_id'] = $re['member_id'];
-            $result[$key]['nickname'] = $re['nickname'];
-        }
-//         var_dump($data);
-//         var_dump(Yaf\Session::getInstance()->get());
+
     }
     
     public function loginAction()
