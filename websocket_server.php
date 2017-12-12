@@ -1,6 +1,7 @@
 <?php
 $server = new swoole_websocket_server("0.0.0.0", 9502);
 $redis = new Redis();
+$redis->connect('116.62.58.170', '6379');
 
 $server->on('open', function ($server, $req) use($redis) {
     $redis->set("fd_".$req->fd,$req->fd);
